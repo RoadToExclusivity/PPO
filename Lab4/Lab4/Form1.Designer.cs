@@ -49,8 +49,8 @@
             // 
             // cbSize
             // 
+            this.cbSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cbSize.FormattingEnabled = true;
             this.cbSize.Items.AddRange(new object[] {
             "1 комната\t",
             "2 комнаты",
@@ -102,7 +102,7 @@
             this.btnNext.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnNext.Location = new System.Drawing.Point(123, 178);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 31);
+            this.btnNext.Size = new System.Drawing.Size(76, 31);
             this.btnNext.TabIndex = 5;
             this.btnNext.Text = "Далее";
             this.btnNext.UseVisualStyleBackColor = true;
