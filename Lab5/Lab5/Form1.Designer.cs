@@ -34,7 +34,6 @@
             // 
             // tmr
             // 
-            this.tmr.Enabled = true;
             this.tmr.Interval = 20;
             this.tmr.Tick += new System.EventHandler(this.tmr_Tick);
             // 

@@ -9,7 +9,8 @@ namespace Lab5
     {
         private Image m_ball, m_field;
         private int m_x, m_y, m_dx, m_dy, m_counter;
-        private const int BALL_DX = 1, BALL_DY = 1, BALL_START_X = 0, BALL_START_Y = 200, OFFSET_X = 20, OFFSET_Y = 20;
+        private const int BALL_DX = 3, BALL_DY = 3, BALL_START_X = 0, BALL_START_Y = 200, 
+            OFFSET_X = 13, OFFSET_Y = 12, TIMER_INTERVAL = 20;
 
         public frmMain()
         {
@@ -24,7 +25,7 @@ namespace Lab5
             }
             catch (Exception)
             {
-                MessageBox.Show("Картинки " + fileName + " не могут быть загружены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Картинка " + fileName + " не могут быть загружены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -51,31 +52,45 @@ namespace Lab5
             m_y = BALL_START_Y;
 
             m_counter = Environment.TickCount;
+            tmr.Interval = TIMER_INTERVAL;
+            tmr.Enabled = true;
         }
 
         protected override void OnPaint(PaintEventArgs pe)
         {
             base.OnPaint(pe);
 
-            if (m_x + m_dx < OFFSET_X || m_x + m_ball.Width + m_dx > this.ClientSize.Width)
+            if (m_x + m_dx < -OFFSET_X || m_x + m_ball.Width + m_dx > this.ClientSize.Width + OFFSET_X)
             {
+                if (m_x + m_dx < -OFFSET_X)
+                {
+                    m_x = -OFFSET_X;
+                }
+                else
+                {
+                    m_x = this.ClientSize.Width + OFFSET_X - m_ball.Width;
+                }
                 m_dx = -m_dx;
             }
-            if (m_y + m_dy < OFFSET_Y || m_y + m_ball.Height + m_dy > this.ClientSize.Height)
+            if (m_y + m_dy < -OFFSET_Y || m_y + m_ball.Height + m_dy > this.ClientSize.Height + OFFSET_Y)
             {
+                if (m_y + m_dy < -OFFSET_Y)
+                {
+                    m_y = -OFFSET_Y;
+                }
+                else
+                {
+                    m_y = this.ClientSize.Height + OFFSET_Y - m_ball.Height;
+                }
                 m_dy = -m_dy;
             }
-            ImageAttributes attr = new ImageAttributes();
-            //attr.SetColorKey(Color.White, Color.White);
-
-            Rectangle dstRect = new Rectangle(m_x, m_y, m_ball.Width, m_ball.Height);
-            pe.Graphics.DrawImage(m_ball, dstRect, 0, 0, m_ball.Width, m_ball.Height, GraphicsUnit.Pixel, attr);
+            pe.Graphics.DrawImage(m_ball, new Point(m_x, m_y));
         }
 
         private void tmr_Tick(object sender, EventArgs e)
         {
-            m_x += m_dx * (Environment.TickCount - m_counter);
-            m_y += m_dy * (Environment.TickCount - m_counter);
+            m_x += m_dx * (Environment.TickCount - m_counter) / TIMER_INTERVAL;
+            m_y += m_dy * (Environment.TickCount - m_counter) / TIMER_INTERVAL;
             m_counter = Environment.TickCount;
 
             this.Refresh();
