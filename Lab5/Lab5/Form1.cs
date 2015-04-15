@@ -9,8 +9,8 @@ namespace Lab5
     {
         private Image m_ball, m_field;
         private int m_x, m_y, m_dx, m_dy, m_counter;
-        private const int BALL_DX = 3, BALL_DY = 3, BALL_START_X = 0, BALL_START_Y = 200, 
-            OFFSET_X = 13, OFFSET_Y = 12, TIMER_INTERVAL = 20;
+        private const int BALL_DX = 1, BALL_DY = 1, BALL_START_X = 0, BALL_START_Y = 200, 
+            OFFSET_X = 10, OFFSET_Y = 10, TIMER_INTERVAL = 10;
 
         public frmMain()
         {
